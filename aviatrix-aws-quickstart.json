@@ -2,7 +2,7 @@
    "AWSTemplateFormatVersion" : "2010-09-09",
    "Description" : "Aviatrix Systems - Creates the necessary policies, roles, security group and launches Aviatrix Controller instance",
    "Parameters":
-   {
+    {
      "VPCParam":
       {
         "Type": "AWS::EC2::VPC::Id",
@@ -23,6 +23,15 @@
       {
         "Type": "AWS::EC2::KeyPair::KeyName",
         "Description": "Select your Keypair"
+      }
+    },
+   "Mappings" :
+    {
+      "RegionMap" : {
+        "us-east-1" : { "Name" : "ami-690c467e"},
+        "us-east-2" : { "Name" : "ami-811248e4"},
+        "us-west-1" : { "Name" : "ami-43206823"},
+        "us-west-2" : { "Name" : "ami-03558e63"}
       }
     },
    "Resources" : {
@@ -335,7 +344,7 @@
        "AviatrixController" : {
             "Type" : "AWS::EC2::Instance",
             "Properties" : {
-               "ImageId" : "ami-03558e63",
+               "ImageId" : { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "Name" ]},
                "KeyName" : { "Ref": "KeyNameParam" },
                "InstanceType": "t2.medium",
                "IamInstanceProfile" : {"Ref":  "AviatrixInstanceProfile" },

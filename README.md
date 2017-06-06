@@ -12,9 +12,10 @@ This CloudFormation script will create the following:
 
 * An existing VPC.
 * A subnet on that VPC.
+* An internet gateway on the subnet.
 * KeyPair.
 
-> Note: this script does **NOT** check that the subnet selected is on the same VPC selected, you need to make sure you are selecting the right combination.
+> Note: this script does **NOT** check that the subnet selected is on the same VPC selected and on the right AvailabilityZone, you need to make sure you are selecting the right combination.
 
 ### Step by step Procedure:
 
@@ -58,3 +59,8 @@ This CloudFormation script will create the following:
 12. Verify that the instance, roles and policies has been created and associated accordingly.
 
 13. Enjoy! You are welcomed!
+
+### Caveats:
+
+* Currently only working for US based AWS Zones/AMI. I will add the rest of the regions soon.
+* There is no current automated way to check if the VPC/Subnet/IGW are all in place and correctly configured. Manual creation of those elements is required.
