@@ -14,7 +14,9 @@
          }
        ],
        "ParameterLabels" : {
-         "VPCVPCParam" : { "default" : "Which VPC should this be deployed to?" }
+         "VPCParam" : { "default" : "Which VPC should the Aviatrix Controller be deployed to?" },
+         "SubnetParam" : { "default" : "Which subnet within that VPC?" },
+         "KeyNameParam" : { "default" : "Which keypair will be used?" }
        }
      }
    },
