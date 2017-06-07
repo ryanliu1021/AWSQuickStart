@@ -12,10 +12,13 @@ This CloudFormation script will create the following:
 
 * An existing VPC.
 * A subnet on that VPC.
-* An internet gateway on the subnet.
+* An internet gateway attached to the VPC.
 * KeyPair.
+* In order to use the Aviatrix Controller first you need to accept the terms and subscribe to it in the AWS Marketplace.  Click [here](https://aws.amazon.com/marketplace/pp?sku=zemc6exdso42eps9ki88l9za)
 
 > Note: this script does **NOT** check that the subnet selected is on the same VPC selected and on the right AvailabilityZone, you need to make sure you are selecting the right combination.
+
+> Note 2: this script does **NOT** check that an Internet Gateway is created and attached to the VPC. If this is missing there will be no way to access the Aviatrix Controller.
 
 ### Step by step Procedure:
 
