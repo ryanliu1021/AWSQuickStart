@@ -39,6 +39,9 @@ This CloudFormation script will create the following:
 ```
   Choose file -> aviatrix-aws-quickstart.json
 ```
+
+  > Note: the [aviatrix-aws-quickstart.json file](https://github.com/AviatrixSystems/AWSQuickStart/blob/master/aviatrix-aws-quickstart.json) can be found in this project, click [here](https://raw.githubusercontent.com/downloads/AviatrixSystems/AWSQuickStart/master/aviatrix-aws-quickstart.json)   for direct download.
+
 5. Click next.
 
 6. On the Stack Name textbox, Name your Stack -> Something like *AviatrixController*
@@ -48,7 +51,6 @@ This CloudFormation script will create the following:
   * VPC
   * Subnet
   * KeyPair Name
-
 
 8. Click next
 
@@ -65,5 +67,4 @@ This CloudFormation script will create the following:
 
 ### Caveats:
 
-* Currently only working for US based AWS Zones/AMI. I will add the rest of the regions soon.
 * There is no current automated way to check if the VPC/Subnet/IGW are all in place and correctly configured. Manual creation of those elements is required.
