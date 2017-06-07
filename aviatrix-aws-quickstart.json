@@ -13,12 +13,6 @@
          "Type": "AWS::EC2::Subnet::Id",
          "Description": "Select Subnet"
        },
-     "AvailabilityZoneParam":
-      {
-        "Type": "AWS::EC2::AvailabilityZone::Name",
-        "Default": "us-west-2a",
-        "Description": "Select Availability Zone"
-      },
      "KeyNameParam":
       {
         "Type": "AWS::EC2::KeyPair::KeyName",
@@ -348,7 +342,6 @@
                "KeyName" : { "Ref": "KeyNameParam" },
                "InstanceType": "t2.medium",
                "IamInstanceProfile" : {"Ref":  "AviatrixInstanceProfile" },
-               "AvailabilityZone": { "Ref": "AvailabilityZoneParam" },
                "NetworkInterfaces": [ {
                   "AssociatePublicIpAddress": "true",
                   "DeviceIndex": "0",
