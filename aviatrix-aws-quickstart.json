@@ -1,6 +1,23 @@
 {
    "AWSTemplateFormatVersion" : "2010-09-09",
    "Description" : "Aviatrix Systems - Creates the necessary policies, roles, security group and launches Aviatrix Controller instance",
+   "Metadata" : {
+     "AWS::CloudFormation::Interface" : {
+       "ParameterGroups" : [
+         {
+           "Label" : { "default" : "Network Configuration" },
+           "Parameters" : [ "VPCParam", "SubnetParam" ]
+         },
+         {
+           "Label" : { "default":"Amazon EC2 Configuration" },
+           "Parameters" : [ "KeyNameParam" ]
+         }
+       ],
+       "ParameterLabels" : {
+         "VPCVPCParam" : { "default" : "Which VPC should this be deployed to?" }
+       }
+     }
+   },
    "Parameters":
     {
      "VPCParam":

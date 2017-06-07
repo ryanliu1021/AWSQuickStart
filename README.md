@@ -45,9 +45,10 @@ This CloudFormation script will create the following:
 
 7. Select the following parameters:
 
-  * KeyPair Name
-  * Subnet
   * VPC
+  * Subnet
+  * KeyPair Name
+
 
 8. Click next
 
