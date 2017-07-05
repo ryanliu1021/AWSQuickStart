@@ -424,6 +424,16 @@
     {
       "Description": "AviatrixRoleEC2 ARN",
       "Value" : { "Fn::GetAtt" : [ "AviatrixRoleEC2" , "Arn" ] }
+    },
+    "AviatrixControllerEIP" :
+    {
+      "Description": "AviatrixController External IP",
+      "Value" : { "Fn::GetAtt" : [ "AviatrixController" , "PublicIp" ] }
+    },
+    "AviatrixControllerPrivateIP" :
+    {
+      "Description": "AviatrixController Private IP",
+      "Value" : { "Fn::GetAtt" : [ "AviatrixController" , "PrivateIp" ] }
     }
   }
 }
