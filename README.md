@@ -15,7 +15,7 @@ If you only need to create the roles and policies, and plan to manually start th
 ### Pre-requisites:
 
 * An existing VPC.
-* A subnet on that VPC.
+* A public subnet on that VPC.
 * An internet gateway attached to the VPC.
 * KeyPair.
 * In order to use the Aviatrix Controller first you need to accept the terms and subscribe to it in the AWS Marketplace.  Click [here](https://aws.amazon.com/marketplace/pp?sku=zemc6exdso42eps9ki88l9za)
