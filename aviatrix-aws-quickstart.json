@@ -358,7 +358,7 @@
       {
         "ImageId" : { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "Name" ]},
         "KeyName" : { "Ref": "KeyNameParam" },
-        "InstanceType": "t2.medium",
+        "InstanceType": "t2.large",
         "IamInstanceProfile" : {"Ref":  "AviatrixInstanceProfile" },
         "NetworkInterfaces":
         [ {
