@@ -26,7 +26,7 @@ This CloudFormation script will create the following:
   Choose file -> aviatrix-aws-quickstart-lite.json
 ```
 
-  > Note: the [aviatrix-aws-quickstart-lite.json file](https://github.com/AviatrixSystems/AWSQuickStart/blob/master/aviatrix-aws-quickstart-lite.json) can be found in this project, click [here](https://raw.githubusercontent.com/downloads/AviatrixSystems/AWSQuickStart/master/aviatrix-aws-quickstart-lite.json)   for direct download.
+  > Note: the [aviatrix-aws-quickstart-lite.json file](https://github.com/AviatrixSystems/AWSQuickStart/blob/master/aviatrix-aws-quickstart-lite.json) can be found in this project, click [here](https://raw.githubusercontent.com/AviatrixSystems/AWSQuickStart/master/aviatrix-aws-quickstart-lite.json)   for direct download.
 
 5. Click next.
 
