@@ -1,0 +1,113 @@
+{
+    "AWSTemplateFormatVersion" : "2010-09-09",
+    "Description" : "Aviatrix Systems - Creates the necessary policies and roles",
+    "Metadata" :
+    {
+      "AWS::CloudFormation::Interface" :
+      {
+        "ParameterGroups" : [ { "Label" : { "default" : "Parent AWS AccountId" }, "Parameters" : [ "ParentAccountID"] } ],
+        "ParameterLabels" : { "ParentAccountID" : { "default" : "Parent AWS account? (optional)" } }
+      }
+    },
+    "Parameters":
+    {
+      "ParentAccountID": { "Type": "String", "Description": "Parent AWS AccountId" }
+    },
+    "Conditions" : {
+      "AddParentAccountID" : { "Fn::Not" : [ { "Fn::Equals": [ { "Ref": "ParentAccountID" }, "" ] } ] }
+    },
+    "Resources" :
+    {
+      "AviatrixRoleEC2" :
+      {
+        "Type": "AWS::IAM::Role",
+        "Properties": {
+           "RoleName": "aviatrix-role-ec2",
+           "AssumeRolePolicyDocument": {
+              "Version" : "2012-10-17",
+              "Statement": [ {
+                 "Effect": "Allow",
+                 "Principal": {
+                    "Service": [ "ec2.amazonaws.com" ]
+                 },
+                 "Action": [ "sts:AssumeRole" ]
+              } ]
+           },
+           "Path": "/"
+         }
+     },
+      "AviatrixRoleApp" :
+      {
+        "Type": "AWS::IAM::Role",
+        "Properties": {
+           "RoleName": "aviatrix-role-app",
+           "AssumeRolePolicyDocument": {
+              "Version" : "2012-10-17",
+              "Statement": [ {
+                 "Effect": "Allow",
+                 "Principal": {
+                   "Fn::If" : [ "AddParentAccountID",
+                                { "AWS": [ { "Fn::Join" : [ "", [ "arn:aws:iam::", { "Ref" : "ParentAccountID" }, ":root" ] ] },
+                                           { "Fn::Join" : [ "", [ "arn:aws:iam::", { "Ref" : "AWS::AccountId" } , ":root" ] ] } ] },
+                                { "AWS": [ { "Fn::Join" : [ "", [ "arn:aws:iam::", { "Ref" : "AWS::AccountId" } , ":root" ] ] } ] } ]
+                 },
+                 "Action": [ "sts:AssumeRole" ]
+              } ]
+           },
+           "Path": "/"
+         }
+     },
+      "CreateAviatrixAssumeRolePolicy" :
+      {
+        "Type" : "AWS::IAM::ManagedPolicy",
+        "Properties" :
+        {
+          "ManagedPolicyName" : "aviatrix-assume-role-policy",
+          "Description" : "Policy for creating aviatrix-assume-role-policy",
+          "Path" : "/",
+          "PolicyDocument" :
+          {
+            "Fn::Transform" : {
+               "Name" : "AWS::Include",
+               "Parameters" : {
+                   "Location" : "s3://aviatrix-download/iam_assume_role_policy.txt"
+                }
+            }
+          },
+          "Roles" :
+          [ {
+            "Ref": "AviatrixRoleEC2"
+          } ]
+        }
+      },
+      "CreateAviatrixAppPolicy" :
+      {
+        "Type" : "AWS::IAM::ManagedPolicy",
+        "Properties" :
+        {
+          "ManagedPolicyName" : "aviatrix-app-policy",
+          "Description" : "Policy for creating aviatrix-app-policy",
+          "Path" : "/",
+          "PolicyDocument" :
+          {
+            "Fn::Transform" : {
+               "Name" : "AWS::Include",
+               "Parameters" : {
+                   "Location" : "s3://aviatrix-download/IAM_access_policy_for_CloudN.txt"
+                }
+            }
+          },
+          "Roles" :
+          [ {
+            "Ref": "AviatrixRoleApp"
+          } ]
+        }
+      }
+    },
+    "Outputs" :
+    {
+      "AccountId" : { "Description": "Amazon Account ID", "Value" : { "Ref" : "AWS::AccountId" } },
+      "AviatrixRoleAppARN" : { "Description": "AviatrixRoleApp ARN", "Value" : { "Fn::GetAtt" : [ "AviatrixRoleApp" , "Arn" ] } },
+      "AviatrixRoleEC2ARN" : { "Description": "AviatrixRoleEC2 ARN", "Value" : { "Fn::GetAtt" : [ "AviatrixRoleEC2" , "Arn" ] } }
+    }
+}
