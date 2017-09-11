@@ -102,6 +102,16 @@
             "Ref": "AviatrixRoleApp"
           } ]
         }
+      },
+      "AviatrixInstanceProfile":
+      {
+        "Type": "AWS::IAM::InstanceProfile",
+        "Properties":
+        {
+          "InstanceProfileName": "aviatrix-role-ec2",
+          "Path": "/",
+          "Roles": [ { "Ref": "AviatrixRoleEC2" } ]
+        }
       }
     },
     "Outputs" :
