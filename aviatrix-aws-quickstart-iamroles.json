@@ -302,6 +302,7 @@
     {
       "AccountId" : { "Description": "Amazon Account ID", "Value" : { "Ref" : "AWS::AccountId" } },
       "AviatrixRoleAppARN" : { "Description": "AviatrixRoleApp ARN", "Value" : { "Fn::GetAtt" : [ "AviatrixRoleApp" , "Arn" ] } },
-      "AviatrixRoleEC2ARN" : { "Description": "AviatrixRoleEC2 ARN", "Value" : { "Fn::GetAtt" : [ "AviatrixRoleEC2" , "Arn" ] } }
+      "AviatrixRoleEC2ARN" : { "Description": "AviatrixRoleEC2 ARN", "Value" : { "Fn::GetAtt" : [ "AviatrixRoleEC2" , "Arn" ] } },
+      "AviatrixInstanceProfile" : { "Description": "Aviatrix Instance Profile", "Value" : { "Ref" :  "AviatrixInstanceProfile"} }
     }
 }
