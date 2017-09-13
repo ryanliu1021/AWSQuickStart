@@ -68,5 +68,13 @@
           }
         }
     }
+  },
+  "Outputs" :
+  {
+    "AccountId" : { "Description": "Amazon Account ID", "Value" : { "Fn::GetAtt" : [ "AviatrixIAMRolesStack", "Outputs.AccountId" ] } },
+    "AviatrixRoleAppARN" : { "Description": "AviatrixRoleApp ARN", "Value" : { "Fn::GetAtt" : [ "AviatrixIAMRolesStack", "Outputs.AviatrixRoleAppARN" ] } },
+    "AviatrixRoleEC2ARN" : { "Description": "AviatrixRoleEC2 ARN", "Value" : { "Fn::GetAtt" : [ "AviatrixIAMRolesStack", "Outputs.AviatrixRoleEC2ARN" ] } },
+    "AviatrixControllerEIP" : { "Description": "AviatrixController External IP", "Value" : { "Fn::GetAtt" : [ "AviatrixControllerStack", "Outputs.AviatrixControllerEIP" ] } },
+    "AviatrixControllerPrivateIP" : { "Description": "AviatrixController Private IP", "Value" : { "Fn::GetAtt" : [ "AviatrixControllerStack", "Outputs.AviatrixControllerPrivateIP" ] } }
   }
 }
