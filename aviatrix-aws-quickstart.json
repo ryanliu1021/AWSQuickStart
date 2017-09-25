@@ -109,7 +109,7 @@
               }
             ]
           },
-          "Path": "/",
+          "Path": "/"
       }
     },
     "CreateAviatrixAssumeRolePolicy" :
@@ -362,7 +362,6 @@
         "IamInstanceProfile" : {"Ref":  "AviatrixInstanceProfile" },
         "NetworkInterfaces":
         [ {
-            "AssociatePublicIpAddress": "true",
             "DeviceIndex": "0",
             "GroupSet": [{ "Ref" : "AviatrixSG" }],
             "SubnetId": { "Ref" : "SubnetParam" }
@@ -378,6 +377,13 @@
             "Value": "Aviatrix"
           }
         ]
+      }
+    },
+    "AviatrixEIP":
+    {
+      "Type": "AWS::EC2::EIP",
+      "Properties" : {
+        "InstanceId" : {"Ref":  "AviatrixController" }
       }
     },
     "AviatrixSG":

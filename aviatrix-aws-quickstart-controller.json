@@ -101,7 +101,6 @@
         "IamInstanceProfile" : {"Ref":  "AviatrixInstanceProfile" },
         "NetworkInterfaces":
         [ {
-            "AssociatePublicIpAddress": "true",
             "DeviceIndex": "0",
             "GroupSet": [{ "Ref" : "AviatrixSG" }],
             "SubnetId": { "Ref" : "SubnetParam" }
@@ -112,6 +111,13 @@
           { "Key": "Project", "Value": "Aviatrix" },
           { "Key": "CreatedUsing", "Value": "Aviatrix Quickstart" }
         ]
+      }
+    },
+    "AviatrixEIP":
+    {
+      "Type": "AWS::EC2::EIP",
+      "Properties" : {
+        "InstanceId" : {"Ref":  "AviatrixController" }
       }
     },
     "AviatrixSG":
