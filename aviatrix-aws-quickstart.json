@@ -14,13 +14,18 @@
         {
           "Label" : { "default":"Amazon EC2 Configuration" },
           "Parameters" : [ "KeyNameParam" ]
+        },
+        {
+          "label" : { "default" : "IAM role creation"},
+           "Parameters" : [ "IAMRoleParam" ]
         }
       ],
       "ParameterLabels" :
       {
          "VPCParam" : { "default" : "Which VPC should the Aviatrix Controller be deployed to?" },
          "SubnetParam" : { "default" : "Which subnet within that VPC?" },
-         "KeyNameParam" : { "default" : "Which keypair will be used?" }
+         "KeyNameParam" : { "default" : "Which keypair will be used?" },
+         "IAMRoleParam" : { "default" : "Select no if Aviatrix IAM role has not been created, select aviatrix-role-ec2 if there is already Avivatrix IAM role created"}
       }
     }
   },
@@ -40,8 +45,19 @@
       {
         "Type": "AWS::EC2::KeyPair::KeyName",
         "Description": "Select your Keypair"
+      },
+      "IAMRoleParam" : {
+            "Description" : "Determine if IAM roles aviatrix-role-ec2 and aviatrix-role-app should be created.",
+            "Default" : "no",
+            "Type" : "String",
+            "AllowedValues" : ["aviatrix-role-ec2", "no"]
       }
   },
+
+  "Conditions" : {
+    "AviatrixIAMRoleNotExist" : {"Fn::Equals" : [{"Ref" : "IAMRoleParam"}, "no"]}
+  },
+    
   "Mappings" :
   {
     "RegionMap" :
@@ -64,9 +80,10 @@
   },
   "Resources" :
   {
-    "AviatrixRoleEC2" :
-    {
+     "AviatrixRoleEC2": 
+     {
       "Type": "AWS::IAM::Role",
+      "Condition" : "AviatrixIAMRoleNotExist",
       "Properties":
       {
         "RoleName": "aviatrix-role-ec2",
@@ -88,9 +105,10 @@
         "Path": "/"
       }
     },
-    "AviatrixRoleApp" :
+   "AviatrixRoleApp":
     {
       "Type": "AWS::IAM::Role",
+      "Condition" : "AviatrixIAMRoleNotExist",
       "Properties":
       {
           "RoleName": "aviatrix-role-app",
@@ -115,6 +133,7 @@
     "CreateAviatrixAssumeRolePolicy" :
     {
       "Type" : "AWS::IAM::ManagedPolicy",
+      "Condition" : "AviatrixIAMRoleNotExist",
       "Properties" :
       {
         "ManagedPolicyName" : "aviatrix-assume-role-policy",
@@ -145,6 +164,7 @@
     "CreateAviatrixAppPolicy" :
     {
        "Type" : "AWS::IAM::ManagedPolicy",
+       "Condition" : "AviatrixIAMRoleNotExist",
        "Properties" : {
          "ManagedPolicyName" : "aviatrix-app-policy",
          "Description" : "Policy for creating aviatrix-app-policy",
@@ -348,7 +368,14 @@
       "Properties":
       {
         "Path": "/",
-        "Roles": [ { "Ref": "AviatrixRoleEC2" } ]
+        "Roles": [{
+	   "Fn::If" : [
+	      "AviatrixIAMRoleNotExist",  
+              { "Ref": "AviatrixRoleEC2" },
+              {  "Ref" : "IAMRoleParam"}
+            ]
+         }]
+             
       }
     },
     "AviatrixController" :
@@ -424,13 +451,16 @@
     "AviatrixRoleAppARN" :
     {
       "Description": "AviatrixRoleApp ARN",
+      "Condition" : "AviatrixIAMRoleNotExist",
       "Value" : { "Fn::GetAtt" : [ "AviatrixRoleApp" , "Arn" ] }
     },
     "AviatrixRoleEC2ARN" :
     {
       "Description": "AviatrixRoleEC2 ARN",
+      "Condition" : "AviatrixIAMRoleNotExist",
       "Value" : { "Fn::GetAtt" : [ "AviatrixRoleEC2" , "Arn" ] }
     },
+
     "AviatrixControllerEIP" :
     {
       "Description": "AviatrixController External IP",
