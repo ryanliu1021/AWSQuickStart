@@ -55,6 +55,7 @@ If you only need to create the roles and policies, and plan to manually start th
   * VPC
   * Subnet
   * KeyPair Name
+  * Aviatrix IAMRole (select no if this is the first time you are launching Aviatrix Controller, i.e., no aviatrix-role-ec2 IAM role and associated security policies have been created.)
 
 8. Click next
 
