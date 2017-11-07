@@ -13,10 +13,10 @@
         },
         {
           "Label" : { "default":"Amazon EC2 Configuration" },
-          "Parameters" : [ "KeyNameParam" ]
+          "Parameters" : [ "KeyNameParam", "InstanceTypeParam" ]
         },
         {
-          "label" : { "default" : "IAM role creation"},
+          "Label" : { "default" : "IAM role creation"},
            "Parameters" : [ "IAMRoleParam" ]
         }
       ],
@@ -25,7 +25,9 @@
          "VPCParam" : { "default" : "Which VPC should the Aviatrix Controller be deployed to?" },
          "SubnetParam" : { "default" : "Which subnet within that VPC?" },
          "KeyNameParam" : { "default" : "Which keypair will be used?" },
-         "IAMRoleParam" : { "default" : "Select no if Aviatrix IAM role has not been created, select aviatrix-role-ec2 if there is already Avivatrix IAM role created"}
+         "IAMRoleParam" : { "default" : "Select no if Aviatrix IAM role has not been created, select aviatrix-role-ec2 if there is already Avivatrix IAM role created"},
+         "InstanceTypeParam" : { "default" : "Select Controller Size"}
+
       }
     }
   },
@@ -51,13 +53,20 @@
             "Default" : "no",
             "Type" : "String",
             "AllowedValues" : ["aviatrix-role-ec2", "no"]
+      },
+      "InstanceTypeParam":
+      {
+        "Type" : "String",
+        "Default" : "t2.large",
+        "AllowedValues" : ["t2.large", "m3.medium","m3.large","m3.xlarge","m4.large","m4.xlarge","c4.large","c4.xlarge"],
+        "Description" : "Select an instance size for the controller. Default is t2.large"
       }
   },
 
   "Conditions" : {
     "AviatrixIAMRoleNotExist" : {"Fn::Equals" : [{"Ref" : "IAMRoleParam"}, "no"]}
   },
-    
+
   "Mappings" :
   {
     "RegionMap" :
@@ -80,7 +89,7 @@
   },
   "Resources" :
   {
-     "AviatrixRoleEC2": 
+     "AviatrixRoleEC2":
      {
       "Type": "AWS::IAM::Role",
       "Condition" : "AviatrixIAMRoleNotExist",
@@ -370,12 +379,12 @@
         "Path": "/",
         "Roles": [{
 	   "Fn::If" : [
-	      "AviatrixIAMRoleNotExist",  
+	      "AviatrixIAMRoleNotExist",
               { "Ref": "AviatrixRoleEC2" },
               {  "Ref" : "IAMRoleParam"}
             ]
          }]
-             
+
       }
     },
     "AviatrixController" :
@@ -385,7 +394,7 @@
       {
         "ImageId" : { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "Name" ]},
         "KeyName" : { "Ref": "KeyNameParam" },
-        "InstanceType": "t2.large",
+        "InstanceType": { "Ref": "InstanceTypeParam" },
         "IamInstanceProfile" : {"Ref":  "AviatrixInstanceProfile" },
         "NetworkInterfaces":
         [ {
