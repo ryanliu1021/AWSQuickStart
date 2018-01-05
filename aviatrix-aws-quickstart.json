@@ -157,7 +157,6 @@
               "Effect": "Allow",
               "Action":
               [
-                "iam:UpdateAssumeRolePolicy",
                 "sts:AssumeRole"
               ],
               "Resource": "arn:aws:iam::*"
@@ -272,7 +271,14 @@
                        "ec2:DeleteTags",
                        "ec2:CreateVpc",
                        "ec2:DeleteVpc",
-                       "ec2:ModifyVpcAttribute"
+                       "ec2:ModifyVpcAttribute",
+		       "ec2:CreateCustomerGateway",
+		       "ec2:DeleteCustomerGateway",
+	               "ec2:CreateVpnConnection",
+		       "ec2:DeleteVpnConnection",
+		       "ec2:CreateVpcPeeringConnection",
+		       "ec2:AcceptVpcPeeringConnection",
+		       "ec2:DeleteVpcPeeringConnection"
                    ],
                    "Resource": "*"
                },
@@ -313,24 +319,6 @@
                {
                    "Effect": "Allow",
                    "Action": [
-                       "cloudwatch:DeleteAlarms",
-                       "cloudwatch:PutMetricAlarm"
-                   ],
-                   "Resource": "*"
-               },
-               {
-                   "Effect": "Allow",
-                   "Action": [
-                       "sns:CreateTopic",
-                       "sns:DeleteTopic",
-                       "sns:Subscribe",
-                       "sns:Unsubscribe"
-                   ],
-                   "Resource": "*"
-               },
-               {
-                   "Effect": "Allow",
-                   "Action": [
                        "sqs:AddPermission",
                        "sqs:ChangeMessageVisibility",
                        "sqs:CreateQueue",
@@ -347,7 +335,6 @@
                {
                    "Effect": "Allow",
                    "Action": [
-                       "iam:UpdateAssumeRolePolicy",
                        "sts:AssumeRole"
                    ],
                    "Resource": "arn:aws:iam::*"
@@ -355,7 +342,6 @@
                {
                    "Effect": "Allow",
                    "Action": [
-                       "iam:UpdateAssumeRolePolicy",
                        "iam:PassRole",
                        "iam:AddRoleToInstanceProfile",
                        "iam:CreateInstanceProfile",
