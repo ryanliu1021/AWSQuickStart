@@ -53,7 +53,7 @@ This CloudFormation script will create the following:
   * Subnet
   * KeyPair Name
   * Controller Size selection
-  * Aviatrix IAMRole (select no if this is the first time you are launching Aviatrix Controller, i.e., no aviatrix-role-ec2 IAM role and associated security policies have been created.)
+  * Aviatrix IAMRole (select New if this is the first time you are launching Aviatrix Controller, i.e., no aviatrix-role-ec2 IAM role and associated security policies have been created.)
 
 8. Click next
 
