@@ -22,10 +22,10 @@
       ],
       "ParameterLabels" :
       {
-         "VPCParam" : { "default" : "Which VPC should the Aviatrix Controller be deployed on?" },
+         "VPCParam" : { "default" : "Which VPC should the Aviatrix Controller be deployed in?" },
          "SubnetParam" : { "default" : "Which public subnet in the VPC?" },
          "KeyNameParam" : { "default" : "Which keypair will be used?" },
-         "IAMRoleParam" : { "default" : "Select no if Aviatrix IAM role has not been created (first time launch), select aviatrix-role-ec2 if there is already Avivatrix IAM role created"},
+         "IAMRoleParam" : { "default" : "Select New if Aviatrix IAM role has not been created (first time launch). Select aviatrix-role-ec2 if there is already Avivatrix IAM role created"},
          "InstanceTypeParam" : { "default" : "Select Controller Size"}
 
       }
@@ -41,7 +41,7 @@
       "SubnetParam":
       {
         "Type": "AWS::EC2::Subnet::Id",
-        "Description": "Select Subnet"
+        "Description": "Aviatrix Controller must be launched on a Public Subnet"
       },
       "KeyNameParam":
       {
@@ -50,9 +50,9 @@
       },
       "IAMRoleParam" : {
             "Description" : "Determine if IAM roles aviatrix-role-ec2 and aviatrix-role-app should be created.",
-            "Default" : "no",
+            "Default" : "New",
             "Type" : "String",
-            "AllowedValues" : ["aviatrix-role-ec2", "no"]
+            "AllowedValues" : ["aviatrix-role-ec2", "New"]
       },
       "InstanceTypeParam":
       {
@@ -64,7 +64,7 @@
   },
 
   "Conditions" : {
-    "AviatrixIAMRoleNotExist" : {"Fn::Equals" : [{"Ref" : "IAMRoleParam"}, "no"]}
+    "AviatrixIAMRoleNotExist" : {"Fn::Equals" : [{"Ref" : "IAMRoleParam"}, "New"]}
   },
 
   "Mappings" :
@@ -380,6 +380,7 @@
       "Properties" :
       {
         "ImageId" : { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "Name" ]},
+        "DisableApiTermination" : "true",
         "KeyName" : { "Ref": "KeyNameParam" },
         "InstanceType": { "Ref": "InstanceTypeParam" },
         "IamInstanceProfile" : {"Ref":  "AviatrixInstanceProfile" },
