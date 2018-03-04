@@ -22,10 +22,10 @@
       ],
       "ParameterLabels" :
       {
-         "VPCParam" : { "default" : "Which VPC should the Aviatrix Controller be deployed to?" },
-         "SubnetParam" : { "default" : "Which subnet within that VPC?" },
+         "VPCParam" : { "default" : "Which VPC should the Aviatrix Controller be deployed on?" },
+         "SubnetParam" : { "default" : "Which public subnet in the VPC?" },
          "KeyNameParam" : { "default" : "Which keypair will be used?" },
-         "IAMRoleParam" : { "default" : "Select no if Aviatrix IAM role has not been created, select aviatrix-role-ec2 if there is already Avivatrix IAM role created"},
+         "IAMRoleParam" : { "default" : "Select no if Aviatrix IAM role has not been created (first time launch), select aviatrix-role-ec2 if there is already Avivatrix IAM role created"},
          "InstanceTypeParam" : { "default" : "Select Controller Size"}
 
       }
