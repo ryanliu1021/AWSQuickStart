@@ -38,10 +38,10 @@ This CloudFormation script will create the following:
 
 4. On the next screen, Select "Upload a template to Amazon S3".
 ```
-  Choose file -> aviatrix-aws-quickstart.template
+  Choose file -> avx-awsmp-BYOL.template
 ```
 
-  > Note: the [aviatrix-aws-quickstart.template file](https://github.com/AviatrixSystems/AWSQuickStart/blob/master/aviatrix-aws-quickstart.template) can be found in this project, click [here](https://raw.githubusercontent.com/AviatrixSystems/AWSQuickStart/master/aviatrix-aws-quickstart.template)   for direct download.
+  > Note: the [avx-awsmp-BYOL.template file](https://github.com/AviatrixSystems/AWSQuickStart/blob/master/avx-awsmp-BYOL.template) can be found in this project, click [here](https://raw.githubusercontent.com/AviatrixSystems/AWSQuickStart/master/avx-awsmp-BYOL.template)   for direct download.
 
 5. Click next.
 
