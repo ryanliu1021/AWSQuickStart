@@ -1,4 +1,4 @@
-## Aviatrix - AWS Quickstart script for CloudFormation
+## Aviatrix - AWS Marketplace CloudFormation template for Aviatrix BYOL AMI
 
 ### Description
 This CloudFormation script will create the following:
