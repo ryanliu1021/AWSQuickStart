@@ -71,20 +71,22 @@
   {
     "RegionMap" :
     {
-      "us-east-1" : { "Name" : "ami-1f28d965" },
-      "us-east-2" : { "Name" : "ami-85466be0" },
-      "us-west-1" : { "Name" : "ami-b49faed4" },
-      "us-west-2" : { "Name" : "ami-3a47b942" },
-      "ca-central-1" : { "Name" : "ami-9372cbf7" },
-      "eu-central-1" : { "Name" : "ami-5e249431" },
-      "eu-west-1" : { "Name" : "ami-760cc40f" },
-      "eu-west-2" : { "Name" : "ami-ffb8ab9b" },
-      "ap-south-1" : { "Name" : "ami-c33b7aac" },
-      "ap-northeast-1" : { "Name" : "ami-23a47145" },
-      "ap-northeast-2" : { "Name" : "ami-f8a07a96" },
-      "ap-southeast-1" : { "Name" : "ami-beb1c2dd" },
-      "ap-southeast-2" : { "Name" : "ami-fc16f79e" },
-      "sa-east-1" : { "Name" : "ami-70463a1c" }
+      "us-east-1" : { "Name" : "ami-db9bb9a1" },
+      "us-east-2" : { "Name" : "ami-b40228d1" },
+      "us-west-1" : { "Name" : "ami-2a7e7c4a" },
+      "us-west-2" : { "Name" : "ami-fd48f885" },
+      "ca-central-1" : { "Name" : "ami-de4bceba" },
+      "eu-central-1" : { "Name" : "ami-a025b9cf" },
+      "eu-west-1" : { "Name" : "ami-830d93fa" },
+      "eu-west-2" : { "Name" : "ami-bc253ed8" },
+      "eu-west-3" : { "Name" : "ami-f8e35585" },
+      "ap-southeast-1" : { "Name" : "ami-0484f878" },
+      "ap-southeast-2" : { "Name" : "ami-34728e56" },
+      "ap-northeast-2" : { "Name" : "ami-d902a2b7" },
+      "ap-southeast-1" : { "Name" : "ami-2a43244c" },
+      "ap-south-1" : { "Name" : "ami-e7560088" },
+      "sa-east-1" : { "Name" : "ami-404c012c" },
+      "us-gov-west-1" : { "Name" : "ami-404c012c" }
     }
   },
   "Resources" :
