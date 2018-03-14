@@ -368,6 +368,7 @@
       "Properties":
       {
         "Path": "/",
+        "InstanceProfileName": "aviatrix-role-ec2",
         "Roles": [{
 	   "Fn::If" : [
 	      "AviatrixIAMRoleNotExist",
@@ -375,7 +376,6 @@
               {  "Ref" : "IAMRoleParam"}
             ]
          }]
-
       }
     },
     "AviatrixController" :
